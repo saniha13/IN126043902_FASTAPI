@@ -67,3 +67,17 @@ def search_products(keyword:str):
         "results":results,
         "total_matches":len(results)
     }
+
+@app.get("/products/deals")
+def get_product_deals():
+
+    # Find cheapest product
+    cheapest_product = min(products, key=lambda p: p["price"])
+
+    # Find most expensive product
+    expensive_product = max(products, key=lambda p: p["price"])
+
+    return {
+        "best_deal": cheapest_product,
+        "premium_pick": expensive_product
+    }
